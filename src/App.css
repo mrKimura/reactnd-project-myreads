@@ -169,8 +169,8 @@ body, .app {
   height: 200px;
   background-color: #eee;
   background-repeat: no-repeat;
-  background-size: cover;
-  background-position-y: bottom;
+  background-size: 100% 100%;
+  /*background-position-y: bottom;*/
 }
 .book-cover-title {
   padding: 20px 10px 0;

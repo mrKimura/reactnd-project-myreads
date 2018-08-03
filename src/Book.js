@@ -1,23 +1,42 @@
-import React, {Component} from 'react'
+import React from "react";
+import PropTypes from "prop-types";
+import Changer from "./Changer";
 
-export default function Book (props) {
-  const {imageUrl} = props;
+export default function Book(props) {
+  const { imageLinks, title, authors, shelf } = props.book;
+  const { changerOptions, handleChangeShelf, book } = props;
   return (
-    <div className="book">
-      <div className="book-top">
-        <div className="book-cover" style={{ backgroundImage: `url(${imageUrl})` }} />
-        <div className="book-shelf-changer">
-          <select>
-            <option value="move" disabled>Move to...</option>
-            <option value="currentlyReading">Currently Reading</option>
-            <option value="wantToRead">Want to Read</option>
-            <option value="read">Read</option>
-            <option value="none">None</option>
-          </select>
+    <li>
+      <div className="book">
+        <div className="book-top">
+          <div
+            className="book-cover"
+            style={{ backgroundImage: `url(${imageLinks.smallThumbnail})` }}
+          />
+          <Changer
+            changerOptions={changerOptions}
+            defaultShelf={shelf}
+            thisBook={book}
+            handleChangeShelf={handleChangeShelf}
+          />
         </div>
+        <div className="book-title">{title}</div>
+        <div className="book-authors">{authors.join(',\n')}</div>
       </div>
-      <div className="book-title">To Kill a Mockingbird</div>
-      <div className="book-authors">Harper Lee</div>
-    </div>
-  )
+    </li>
+  );
 }
+
+Book.propTypes = {
+  book: PropTypes.shape({
+    imageLinks: PropTypes.shape({
+      smallThumbnail: PropTypes.string.isRequired
+    }),
+    title: PropTypes.string.isRequired,
+    authors: PropTypes.arrayOf(PropTypes.string.isRequired),
+    shelf: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired
+  }),
+  changerOptions: PropTypes.array.isRequired,
+  handleChangeShelf: PropTypes.func.isRequired
+};
