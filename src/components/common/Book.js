@@ -1,4 +1,4 @@
-import React, {Component} from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import Changer from "./Changer";
 
@@ -6,17 +6,17 @@ class Book extends Component {
   static propTypes = {
     book: PropTypes.shape({
       imageLinks: PropTypes.shape({
-        smallThumbnail: PropTypes.string.isRequired
+        smallThumbnail: PropTypes.string
       }),
       title: PropTypes.string.isRequired,
-      authors: PropTypes.arrayOf(PropTypes.string.isRequired),
+      authors: PropTypes.arrayOf(PropTypes.string),
       shelf: PropTypes.string.isRequired,
       id: PropTypes.string.isRequired
     }),
     changeShelf: PropTypes.func.isRequired
   };
-  
-  render(){
+
+  render() {
     const { imageLinks, title, authors, shelf } = this.props.book;
     const { changeShelf, book } = this.props;
     return (
@@ -25,7 +25,11 @@ class Book extends Component {
           <div className="book-top">
             <div
               className="book-cover"
-              style={{ backgroundImage: `url(${imageLinks.smallThumbnail})` }}
+              style={
+                imageLinks
+                  ? { backgroundImage: `url(${imageLinks.smallThumbnail})` }
+                  : null
+              }
             />
             <Changer
               defaultShelf={shelf}
@@ -37,10 +41,10 @@ class Book extends Component {
           <div className="book-authors">
             {authors
               ? authors.map(author => (
-                <span key={author} className="book-authors__author">
-                  {author}
-                </span>
-              ))
+                  <span key={author} className="book-authors__author">
+                    {author}
+                  </span>
+                ))
               : null}
           </div>
         </div>
@@ -49,4 +53,4 @@ class Book extends Component {
   }
 }
 
-export default Book
+export default Book;
