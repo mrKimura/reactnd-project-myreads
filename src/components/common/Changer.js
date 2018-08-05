@@ -1,12 +1,12 @@
 import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
+import * as Globals from "../../global_vars";
 
 class Changer extends PureComponent {
   static propTypes = {
-    changerOptions: PropTypes.array.isRequired,
     thisBook: PropTypes.object.isRequired,
     defaultShelf: PropTypes.string.isRequired,
-    handleChangeShelf: PropTypes.func.isRequired
+    changeShelf: PropTypes.func.isRequired
   };
 
   state = {
@@ -27,24 +27,31 @@ class Changer extends PureComponent {
       value: "none",
       content: "None"
     };
-    const { changerOptions, thisBook } = this.props;
-    const allChangerOptions = [...changerOptions, noneValue];
+    const { thisBook } = this.props;
+    const allChangerOptions = [...Globals.bookSections, noneValue];
     return allChangerOptions.map(item => (
-      <option value={item.value} key={item.value + thisBook}>
+      <option value={item.value} key={item.value + thisBook.id}>
         {item.content}
       </option>
     ));
   };
 
   handleChange = event => {
-    const { thisBook, handleChangeShelf } = this.props;
+    const { thisBook, changeShelf } = this.props;
     thisBook.shelf = event.target.value;
-    handleChangeShelf(thisBook)
+    changeShelf(thisBook);
+  };
+
+  getChangerColor = () => {
+    const { value } = this.state;
+    return value === "none"
+      ? "book-shelf-changer book-shelf-changer--unselected"
+      : "book-shelf-changer book-shelf-changer--selected";
   };
 
   render() {
     return (
-      <div className="book-shelf-changer">
+      <div className={this.getChangerColor()}>
         <select value={this.state.value} onChange={this.handleChange}>
           <option value="move" disabled>
             Move to...

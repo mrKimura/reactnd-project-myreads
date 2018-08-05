@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { Route } from "react-router-dom";
 import * as BooksAPI from "./BooksAPI";
 import "./App.css";
-import BookShelf from "./BookShelf";
+import ListBooks from "./components/ListBooks";
+import SearchBooks from "./components/SearchBooks";
 
 const bookSections = [
   {
@@ -21,83 +23,65 @@ const bookSections = [
 class BooksApp extends Component {
   state = {
     allBooks: [],
-    showSearchPage: false
+    stillLoading: false
   };
 
   componentDidMount() {
+    this.setState(() => ({
+      stillLoading: true
+    }));
     BooksAPI.getAll().then(allBooks => {
       this.setState(() => ({
-        allBooks
+        allBooks,
+        stillLoading: false
       }));
     });
   }
 
   changeShelf = bookToChange => {
     const currBooks = this.state.allBooks;
-    const newBooks = currBooks
-      .filter(book => book.id !== bookToChange.id)
-      .concat(bookToChange);
+    const allOtherBooks = currBooks.filter(book => book.id !== bookToChange.id);
+    let newBooks = allOtherBooks;
+    if (bookToChange.shelf !== "none") {
+      newBooks = allOtherBooks.concat(bookToChange);
+    }
     this.setState(() => ({
       allBooks: newBooks
     }));
-    BooksAPI.update(bookToChange, bookToChange.shelf)
+    BooksAPI.update(bookToChange, bookToChange.shelf);
   };
 
-  makeShelves = () => {
-    return bookSections.map(section => (
-      <BookShelf
-        key={section.value}
-        shelfName={section.content}
-        shelfBooks={this.state.allBooks.filter(
-          book => book.shelf === section.value
-        )}
-        changerOptions={bookSections}
-        handleChangeShelf={this.changeShelf}
-      />
-    ));
-  };
+  toggleSearch = () =>
+    this.setState({ showSearchPage: !this.state.showSearchPage });
 
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? (
-          <div className="search-books">
-            <div className="search-books-bar">
-              <a
-                className="close-search"
-                onClick={() => this.setState({ showSearchPage: false })}
-              >
-                Close
-              </a>
-              <div className="search-books-input-wrapper">
-                {/*
-                  NOTES: The search from BooksAPI is limited to a particular set of search terms.
-                  You can find these search terms here:
-                  https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
-
-                  However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
-                  you don't find a specific author or title. Every search is limited by search terms.
-                */}
-                <input type="text" placeholder="Search by title or author" />
-              </div>
-            </div>
-            <div className="search-books-results">
-              <ol className="books-grid" />
-            </div>
-          </div>
-        ) : (
-          <div className="list-books">
-            <div className="list-books-title">
-              <h1>MyReads</h1>
-            </div>
-            <div className="list-books-content">{this.makeShelves()}</div>
-            <div className="open-search">
-              <a onClick={() => this.setState({ showSearchPage: true })}>
-                Add a book
-              </a>
-            </div>
-          </div>
-        )}
+        {this.state.stillLoading && <div className="message">Loading...</div>}
+        <Route
+          path="/"
+          exact
+          render={() => (
+            <ListBooks
+              allBooks={this.state.allBooks}
+              changeShelf={this.changeShelf}
+              toggleSearch={this.toggleSearch}
+              changerOptions={bookSections}
+            />
+          )}
+        />
+        <Route
+          path="/search"
+          exact
+          render={() => (
+            <SearchBooks
+              booksFromState={this.state.allBooks}
+              toggleSearch={this.toggleSearch}
+              changeShelf={this.changeShelf}
+              changerOptions={bookSections}
+            />
+          )}
+        />
       </div>
     );
   }
