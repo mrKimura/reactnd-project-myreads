@@ -27,4 +27,4 @@ Here you can find new books and putting them in your collection, to do that just
 
 **It is important to know** that the search results are fixed and limited to a particular set of search terms, you can find a list of those search terms in [SEARCH_TERMS.md](SEARCH_TERMS.md) .
 
-If the book has already been added to one of the shelves, or you just added it, the color of the control changes.
+If the book has already been added to one of the shelves, or you have just added it, the color of the control changes.
