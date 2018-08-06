@@ -15,7 +15,7 @@ class SearchTopBar extends Component {
   handleChange = event => {
     event.preventDefault();
     const { searchEngine } = this.props;
-    const value = event.target.value.trim();
+    const value = event.target.value;
     this.setState(() => ({
       query: value
     }));

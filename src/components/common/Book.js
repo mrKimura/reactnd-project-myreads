@@ -19,17 +19,15 @@ class Book extends Component {
   render() {
     const { imageLinks, title, authors, shelf } = this.props.book;
     const { changeShelf, book } = this.props;
+    const imageURL =
+      imageLinks && imageLinks.smallThumbnail ? imageLinks.smallThumbnail : "";
     return (
       <li>
         <div className="book">
           <div className="book-top">
             <div
               className="book-cover"
-              style={
-                imageLinks
-                  ? { backgroundImage: `url(${imageLinks.smallThumbnail})` }
-                  : null
-              }
+              style={{ backgroundImage: `url(${imageURL})` }}
             />
             <Changer
               defaultShelf={shelf}

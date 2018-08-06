@@ -22,7 +22,6 @@ class SearchBooks extends Component {
       searchSuccess: true,
       stillLoading: true
     }));
-    const maxFoundItems = 20;
     if (query.length < 1) {
       this.setState(() => ({
         foundBooks: [],
@@ -30,7 +29,9 @@ class SearchBooks extends Component {
       }));
       return;
     }
-    BooksAPI.search(query, maxFoundItems).then(foundBooksRaw => {
+    const maxFoundItems = 20;
+    const normalizedQuery = query.trim();
+    BooksAPI.search(normalizedQuery, maxFoundItems).then(foundBooksRaw => {
       if (foundBooksRaw && foundBooksRaw.length) {
         const foundBooks = this.syncShelvesInFoundWithState(foundBooksRaw);
         this.setState(() => ({
