@@ -8,7 +8,6 @@ class SearchBooks extends Component {
   static propTypes = {
     booksFromState: PropTypes.array.isRequired,
     toggleSearch: PropTypes.func.isRequired,
-    changerOptions: PropTypes.array.isRequired,
     changeShelf: PropTypes.func.isRequired
   };
 

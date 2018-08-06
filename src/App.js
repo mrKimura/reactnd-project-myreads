@@ -5,20 +5,6 @@ import "./App.css";
 import ListBooks from "./components/ListBooks";
 import SearchBooks from "./components/SearchBooks";
 
-const bookSections = [
-  {
-    value: "currentlyReading",
-    content: "Currently Reading"
-  },
-  {
-    value: "wantToRead",
-    content: "Want to Read"
-  },
-  {
-    value: "read",
-    content: "Read"
-  }
-];
 
 class BooksApp extends Component {
   state = {
@@ -66,7 +52,6 @@ class BooksApp extends Component {
               allBooks={this.state.allBooks}
               changeShelf={this.changeShelf}
               toggleSearch={this.toggleSearch}
-              changerOptions={bookSections}
             />
           )}
         />
@@ -78,7 +63,6 @@ class BooksApp extends Component {
               booksFromState={this.state.allBooks}
               toggleSearch={this.toggleSearch}
               changeShelf={this.changeShelf}
-              changerOptions={bookSections}
             />
           )}
         />
