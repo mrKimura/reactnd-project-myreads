@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
-import * as Globals from '../../CONST'
+import * as Globals from '../../utils/CONST'
 
 class Changer extends PureComponent {
   state = {

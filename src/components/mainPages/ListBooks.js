@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import BookShelf from './shelf/BookShelf'
-import * as Globals from '../CONST'
+import BookShelf from '../shelf/BookShelf'
+import * as Globals from '../../utils/CONST'
 
 class ListBooks extends Component {
   makeShelves = () => {

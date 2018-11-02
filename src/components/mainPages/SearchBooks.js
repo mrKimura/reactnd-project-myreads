@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import * as BooksAPI from '../BooksAPI'
-import SearchTopBar from './search/SearchTopBar'
-import SearchResults from './search/SearchResults'
+import * as BooksAPI from '../../utils/BooksAPI'
+import SearchTopBar from '../search/SearchTopBar'
+import SearchResults from '../search/SearchResults'
 
 class SearchBooks extends Component {
   state = {
