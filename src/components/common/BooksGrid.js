@@ -1,33 +1,31 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import Book from "./Book";
+import React from 'react'
+import PropTypes from 'prop-types'
+import Book from './Book'
 
-class BooksGrid extends Component {
-  static propTypes = {
-    thisClassName: PropTypes.string.isRequired,
-    shelfBooks: PropTypes.array.isRequired,
-    changeShelf: PropTypes.func.isRequired
-  };
+const BooksGrid = ({ thisClassName, shelfBooks, changeShelf }) => (
+  <div className={thisClassName}>
+    <ol className="books-grid">
+      {shelfBooks.map(book => (
+        <Book key={book.id} book={book} changeShelf={changeShelf} />
+      ))}
+    </ol>
+  </div>
+)
 
-  setGridBooks = () => {
-    const { shelfBooks, changeShelf } = this.props;
-    return shelfBooks.map(book => (
-      <Book
-        key={book.id}
-        book={book}
-        changeShelf={changeShelf}
-      />
-    ));
-  };
-
-  render() {
-    const { thisClassName } = this.props;
-    return (
-      <div className={thisClassName}>
-        <ol className="books-grid">{this.setGridBooks()}</ol>
-      </div>
-    );
-  }
+BooksGrid.propTypes = {
+  thisClassName: PropTypes.string.isRequired,
+  changeShelf: PropTypes.func.isRequired,
+  shelfBooks: PropTypes.shape({
+    book: PropTypes.shape({
+      imageLinks: PropTypes.shape({
+        smallThumbnail: PropTypes.string,
+      }),
+      title: PropTypes.string.isRequired,
+      authors: PropTypes.arrayOf(PropTypes.string),
+      shelf: PropTypes.string.isRequired,
+      id: PropTypes.string.isRequired,
+    }),
+  }),
 }
 
-export default BooksGrid;
+export default BooksGrid

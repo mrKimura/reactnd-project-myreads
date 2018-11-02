@@ -1,32 +1,27 @@
-import React, { Component } from "react";
+import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import PropTypes from "prop-types";
+import PropTypes from 'prop-types'
 
 class SearchTopBar extends Component {
-  static propTypes = {
-    toggleSearch: PropTypes.func.isRequired,
-    searchEngine: PropTypes.func.isRequired
-  };
-
   state = {
-    query: ""
-  };
+    query: '',
+  }
 
   handleChange = event => {
-    event.preventDefault();
-    const { searchEngine } = this.props;
-    const value = event.target.value;
+    event.preventDefault()
+    const { searchEngine } = this.props
+    const { value } = event.target
     this.setState(() => ({
-      query: value
-    }));
-    searchEngine(value);
-  };
+      query: value,
+    }))
+    searchEngine(value)
+  }
 
   render() {
-    const { query } = this.state;
+    const { query } = this.state
     return (
       <div className="search-books-bar">
-        <Link className="close-search" to='/'>
+        <Link className="close-search" to="/">
           Close
         </Link>
         <div className="search-books-input-wrapper">
@@ -39,7 +34,12 @@ class SearchTopBar extends Component {
           />
         </div>
       </div>
-    );
+    )
   }
 }
-export default SearchTopBar;
+
+SearchTopBar.propTypes = {
+  searchEngine: PropTypes.func.isRequired,
+}
+
+export default SearchTopBar
