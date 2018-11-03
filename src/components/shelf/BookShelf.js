@@ -27,17 +27,19 @@ class BookShelf extends Component {
 }
 
 BookShelf.propTypes = {
-  shelfBooks: PropTypes.shape({
-    book: PropTypes.shape({
-      imageLinks: PropTypes.shape({
-        smallThumbnail: PropTypes.string,
+  shelfBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      book: PropTypes.shape({
+        imageLinks: PropTypes.shape({
+          smallThumbnail: PropTypes.string,
+        }),
+        title: PropTypes.string.isRequired,
+        authors: PropTypes.arrayOf(PropTypes.string),
+        shelf: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
       }),
-      title: PropTypes.string.isRequired,
-      authors: PropTypes.arrayOf(PropTypes.string),
-      shelf: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
     }),
-  }),
+  ),
   shelfName: PropTypes.string.isRequired,
   changeShelf: PropTypes.func.isRequired,
 }

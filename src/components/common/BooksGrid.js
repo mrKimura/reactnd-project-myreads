@@ -15,17 +15,19 @@ const BooksGrid = ({ thisClassName, shelfBooks, changeShelf }) => (
 BooksGrid.propTypes = {
   thisClassName: PropTypes.string.isRequired,
   changeShelf: PropTypes.func.isRequired,
-  shelfBooks: PropTypes.shape({
-    book: PropTypes.shape({
-      imageLinks: PropTypes.shape({
-        smallThumbnail: PropTypes.string,
+  shelfBooks: PropTypes.arrayOf(
+    PropTypes.shape({
+      book: PropTypes.shape({
+        imageLinks: PropTypes.shape({
+          smallThumbnail: PropTypes.string,
+        }),
+        title: PropTypes.string.isRequired,
+        authors: PropTypes.arrayOf(PropTypes.string),
+        shelf: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
       }),
-      title: PropTypes.string.isRequired,
-      authors: PropTypes.arrayOf(PropTypes.string),
-      shelf: PropTypes.string.isRequired,
-      id: PropTypes.string.isRequired,
     }),
-  }),
+  ),
 }
 
 export default BooksGrid
