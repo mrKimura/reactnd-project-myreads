@@ -2,6 +2,7 @@
 
 This is the project for Udacity's React & Redux course.
 It shows my skills in developing web applications using framework React.
+
 MyReads is a React application that allows you to you organize your books in shelves.
 
 ## Install and run
