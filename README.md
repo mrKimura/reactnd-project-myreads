@@ -1,6 +1,8 @@
 # MyReads Project
 
-This is a project for [React Nano Degree](https://www.udacity.com/course/react-nanodegree--nd019) from Udacity which lets you organize your books in shelves.
+This is the project for Udacity's React & Redux course.
+It shows my skills in developing web applications using framework React.
+MyReads is a React application that allows you to you organize your books in shelves.
 
 ## Install and run
 Follow these simple steps to install and run this application on your machine:
