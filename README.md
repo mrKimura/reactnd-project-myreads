@@ -7,7 +7,7 @@ Follow these simple steps to install and run this application on your machine:
 
 * clone this repository to your machine
 * install all project dependencies with `npm install` or `yarn` within the newly created directory
-- Navigate to `http://localhost:3000/` to view the application.
+* Navigate to `http://localhost:3000/` to view the application.
 
 
 ## Usage
