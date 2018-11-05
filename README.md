@@ -2,10 +2,11 @@
 
 This is a project for [React Nano Degree](https://www.udacity.com/course/react-nanodegree--nd019) from Udacity which lets you organize your books in shelves.
 
-## Installation
-- Clone/Download this repo.
-- Run `npm install` or `yarn install` in the project directory to install dependencies.
-- Run `npm start` or `yarn start` to start the application.
+## Install and run
+Follow these simple steps to install and run this application on your machine:
+
+* clone this repository to your machine
+* install all project dependencies with `npm install` or `yarn` within the newly created directory
 - Navigate to `http://localhost:3000/` to view the application.
 
 
@@ -28,3 +29,6 @@ Here you can find new books and putting them in your collection, to do that just
 **It is important to know** that the search results are fixed and limited to a particular set of search terms, you can find a list of those search terms in [SEARCH_TERMS.md](SEARCH_TERMS.md) .
 
 If the book has already been added to one of the shelves, or you have just added it, the color of the control changes.
+
+### Technologies Used
+1. React
